@@ -7,7 +7,7 @@ import { replaceInFileSync } from 'replace-in-file';
 import { deleteSync } from 'del';
 
 const destination = `../demos-light`;
-const categories = `audio camera data dom flow geometry io ml modulation pointer starters visuals`.split(` `);
+const categories = `audio camera data dom flow geometry io ml modulation pointer starters visuals random`.split(` `);
 const deletePatterns = categories.map(c => `${destination}/${c}/`);
 
 // Delete previous sketch categories

@@ -52,7 +52,10 @@ const use = () => {
   Util.rotateElementById(`thingRaw`, rawDegreesCircle);
 };
 
-
+/**
+ * 
+ * @param {PointerEvent} event 
+ */
 const onPointerMove = (event) => {
   const { moveTracker, angleAvg } = settings;
   event.preventDefault();
@@ -79,12 +82,12 @@ setup();
 
 /**
  * Update state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} partialNewState 
  */
-function saveState(s) {
+function saveState(partialNewState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...partialNewState
   });
 }
 

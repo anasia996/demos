@@ -18,7 +18,7 @@ const settings = Object.freeze({
  * wave: number
  * viewportSize: Rects.Rect
  * viewportCenter: Points.Point
- * pointers: {}
+ * pointers: Record<string,Points.Point>
  * }>} State
  */
 
@@ -139,12 +139,12 @@ setup();
 
 /**
  * Update state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} partialNewState 
  */
-function saveState(s) {
+function saveState(partialNewState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...partialNewState
   });
 }
 

@@ -22,6 +22,11 @@ const update = () => {
   addAverage(pointer.x, pointer.y);
 };
 
+/**
+ * Adds absolute values
+ * @param {number} absX 
+ * @param {number} absY 
+ */
 const addAverage = (absX, absY) => {
   const { x, y } = settings.average;
 
@@ -92,13 +97,12 @@ setup();
 
 /**
  * Update state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} newPartialState 
  */
-function saveState(s) {
-
+function saveState(newPartialState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...newPartialState
   });
   return state;
 }

@@ -10,7 +10,7 @@ const destination = `${destinationRoot}/src`;
 // Delete previous src
 deleteSync([ destination ], { force: true });
 
-const categories = `audio camera data dom flow geometry io ml modulation pointer starters visuals`.split(` `);
+const categories = `audio camera data dom flow geometry io ml modulation pointer starters visuals random`.split(` `);
 
 // Copy sketches
 for (const c of categories) {
