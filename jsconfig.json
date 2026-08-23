@@ -10,6 +10,7 @@
     "strictNullChecks": true,
     "allowJs": true,
     "strictFunctionTypes": true,
+    "ignoreDeprecations": "6.0",
     "baseUrl": "./",
     "paths": {
       "@ixfx": [
