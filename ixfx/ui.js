@@ -1,1 +1,953 @@
-import{n as e}from"./chunk-BKBlUVio.js";import{C as t,D as n,O as r,S as i,nt as a,q as o}from"./src-DlHqXvlb.js";import{v as s}from"./src-ZyALqz2x.js";import{W as c}from"./src-wu7Ls46R.js";import"./src-YsNzeaaT.js";import{_ as l,g as u,h as d,m as f,v as p}from"./src-DI_Ag7DT.js";import{$ as m,X as h,_ as g,at as _,bt as v,h as y,lt as b,q as x,v as S,vt as C}from"./src-6ZRiAu1j.js";const w=(e,t)=>{if(e===null)throw Error(`Param 'elem' is null. Expected element to observe`);if(e===void 0)throw Error(`Param 'elem' is undefined. Expected element to observe`);let n=y(t=>{let n=new ResizeObserver(e=>{t.set(e)});return n.observe(e),()=>{n.unobserve(e)}});return x({elapsed:t??100})(n)},T=e=>x({elapsed:e??100})(g(window,`resize`,{innerWidth:0,innerHeight:0})),E=(e=document.documentElement)=>y(t=>{let n=new MutationObserver(e=>{t.set(e)});return n.observe(e,{attributeFilter:[`class`],attributes:!0}),()=>{n.disconnect()}});function D(e){let t=e,n=_(),r=e=>{t=e,n.set(e)};return{dispose:n.dispose,isDisposed:n.isDisposed,last:()=>t,on:n.on,onValue:n.onValue,set:r,setHsl:e=>{r(e)}}}function O(e,t={}){let n=A(e,t),r=n.el,i=t.relative??!1,a=t.inverted??!1,o=m(n,e=>Number.parseFloat(e));i&&(r.max=a?`0`:`1`,r.min=a?`1`:`0`,r.hasAttribute(`step`)||(r.step=`0.1`)),r.getAttribute(`type`)===null&&(r.type=`range`);let s=e=>{n.set(e.toString())};return{...o,last(){return Number.parseFloat(n.last())},set:s}}function k(e,t={}){let n=A(e,{...t,upstreamFilter:e=>typeof e==`object`?d(e):e});return{...m(n,e=>l(e,{scalar:!0,ensureSafe:!0})),last(){return l(n.last(),{scalar:!0,ensureSafe:!0})},set(e){n.set(p(e))}}}function A(e,t={}){let n=typeof e==`string`?document.querySelector(e):e;if(n===null&&typeof e==`string`)throw Error(`Element query could not be resolved '${e}'`);if(n===null)throw Error(`targetOrQuery is null`);let r=c(e),i=(t.when??`changed`)===`changed`?`change`:`input`,a=t.emitInitialValue??!1,o=t.fallbackValue??``,s=t.upstreamSource,l=()=>{},u=t.attributeName,d=t.fieldName;d===void 0&&u===void 0&&(u=d=`value`);let f=()=>{let e;return u&&(e=r.getAttribute(u)),d&&(e=r[d]),e??=o,e},p=e=>{u&&r.setAttribute(u,e),d&&(r[d]=e)},h=e=>{e=t.upstreamFilter?t.upstreamFilter(e):e,p(e)};s&&(l=s.onValue(h),b(s)&&h(s.last()));let g=S(r,i,{fireInitial:a,debugFiring:t.debugFiring??!1,debugLifecycle:t.debugLifecycle??!1}),_=m(g,e=>f());return{..._,el:r,last(){return f()},set(e){p(e)},dispose(e){l(),_.dispose(e),g.dispose(e)}}}function j(e,t={}){let n=c(e),r=(t.when??`changed`)===`changed`?`change`:`input`,i=t.emitInitialValue??!1,a=t.upstreamSource,o=new Map,s=()=>{},l=()=>{let e=new FormData(n),t=[];for(let[n,r]of e.entries()){let e=r.toString(),i=o.get(n);if(!i){let t=p(n,e);t&&(i=t.type===`range`||t.type===`number`?`number`:t.type===`color`?`colour`:t.type===`checkbox`&&(r===`true`||r===`on`)?`boolean`:`string`,o.set(n,i))}if(i===`number`)t.push([n,Number.parseFloat(e)]);else if(i===`boolean`){let r=e===`true`;t.push([n,r])}else if(i===`colour`){let r=d(e);t.push([n,u(r,{scalar:!1})])}else t.push([n,r.toString()])}for(let e of n.querySelectorAll(`input[type="checkbox"]`))!e.checked&&e.value===`true`&&t.push([e.name,!1]);return Object.fromEntries(t)},p=(e,t)=>{let r=n.querySelector(`[name="${e}"]`);if(!r){console.warn(`Form does not contain an element with name="${e}"`);return}if(r.type===`radio`){let r=n.querySelector(`[name="${e}"][value="${t}"]`);if(!r){console.warn(`Form does not contain radio option for name=${e} value=${t}`);return}return r}return r},h=(e,t)=>{let n=p(e,t);if(n&&(n.nodeName===`INPUT`||n.nodeName===`SELECT`)){if(n.type===`color`)typeof t==`object`&&(t=d(t));else if(n.type===`checkbox`)if(typeof t==`boolean`){n.checked=t;return}else console.warn(`Rx.Sources.domForm: Trying to set non boolean type to a checkbox. Name: ${e} Value: ${t} (${typeof t})`);else if(n.type===`radio`){n.checked=!0;return}n.value=t}},g=e=>{for(let[n,r]of Object.entries(e)){let e=o.get(n);e||(e=typeof r,e===`object`&&(f(r),e=`colour`),o.set(n,e)),h(n,t.upstreamFilter?t.upstreamFilter(n,r):r)}};a&&(s=a.onValue(g),b(a)&&g(a.last()));let _=S(n,r,{fireInitial:i,debugFiring:t.debugFiring??!1,debugLifecycle:t.debugLifecycle??!1}),v=m(_,e=>l());return{...v,el:n,last(){return l()},set:g,setNamedValue:h,dispose(e){s(),v.dispose(e),_.dispose(e)}}}function M(e){return h([...document.querySelectorAll(e)])}const N=(e,t,n={})=>I(e,t,{...n,elField:`textContent`}),P=(e,t,n={})=>I(e,t,{...n,elField:`value`,attribName:`value`}),F=(e,t,n={})=>I(e,t,{...n,elField:`innerHTML`}),I=(e,t,...n)=>{if(t===null)throw Error(`Param 'elOrQuery' is null`);if(t===void 0)throw Error(`Param 'elOrQuery' is undefined`);let r=c(t),i=[];return n.length===0?i.push({elField:`textContent`}):i=[...n],B(e,...i.map(e=>`element`in e?e:{...e,element:r}))},L=(e,t)=>{let n=R(e);return e=>{n(e,t)}},R=e=>{if(e.elField!==void 0||e.cssVariable===void 0&&e.attribName===void 0&&e.cssProperty===void 0&&e.textContent===void 0&&e.htmlContent===void 0){let t=e.elField??`textContent`;return(e,n)=>{n[t]=e}}if(e.attribName!==void 0){let t=e.attribName;return(e,n)=>{n.setAttribute(t,e)}}if(e.textContent)return(e,t)=>{t.textContent=e};if(e.htmlContent)return(e,t)=>{t.innerHTML=e};if(e.cssVariable!==void 0){let t=e.cssVariable;return t.startsWith(`--`)||(t=`--`+t),(e,n)=>{n.style.setProperty(t,e)}}return e.cssProperty===void 0?(e,t)=>{}:(t,n)=>{n.style[e.cssProperty]=t}},z=e=>{if(!(!e.transform&&!e.transformValue)){if(e.transformValue){if(e.sourceField===void 0)throw Error(`Expects 'sourceField' to be set when 'transformValue' is set`);return t=>{let n=t[e.sourceField];return e.transformValue(n)}}else if(e.transform){if(e.sourceField!==void 0)throw Error(`If 'transform' is set, 'sourceField' is ignored`);return t=>e.transform(t)}}},B=(e,...t)=>{let n=t.map(e=>{if(e.element&&e.element!==void 0)return e;if(e.query)return{...e,element:c(e.query)};throw Error(`Unable to resolve element. Missing 'element' or 'query' values on bind. ${JSON.stringify(e)}`)}),r=n.map(e=>({update:L(e,e.element),transformer:z(e),sourceField:e.sourceField})),i=e=>{for(let t of r)if(t.transformer)t.update(t.transformer(e));else{let n=t.sourceField?e[t.sourceField]:e;typeof n==`object`?(t.sourceField,t.update(JSON.stringify(n))):t.update(n)}},a=e.on(e=>{C(e)?i(e.value):v(e)&&console.warn(e)});return b(e)&&i(e.last()),{remove:e=>{if(a(),e)for(let e of n)e.element.remove()}}},V=(e,t,n)=>{let r=c(t),i=e=>{n(e,r)},a=e.on(e=>{C(e)?(console.log(e),i(e.value)):console.warn(e)});return b(e)&&i(e.last()),{remove:e=>{a(),e&&r.remove()}}},H=(e,t,n,r={})=>{if(t===null)throw Error(`Param 'elOrQuery' is null`);if(t===void 0)throw Error(`Param 'elOrQuery' is undefined`);let i=c(t),a=e=>{n(e,i)},o=e.onDiff(e=>{a(e)}),s=()=>{b(e)&&r.initial&&r.initial(e.last(),i)};return s(),{refresh:()=>{s()},remove:e=>{o(),e&&i.remove()}}},U=(e,i)=>{let l=i.container?c(i.container):document.body,u=i.defaultTag??`div`,d=new Map,f=new Map;for(let[e,t]of Object.entries(i.binds??{})){let n=t.tagName??u;f.set(e,{...t,update:R(t),transform:z(t),tagName:n,path:e})}let p=e=>{let t=a(f,n(e));if(t!==void 0)return t;if(!e.includes(`.`))return f.get(`_root`)};function*m(e){for(let t of r(e))f.has(t)&&(yield f.get(t));f.has(`_root`)&&e.includes(`.`)&&(yield f.get(`_root`))}let h=(e,n)=>{let r=W(e);console.log(`Rx.Dom.elements.create: ${e} rooted: ${r} value: ${JSON.stringify(n)}`);let i=p(W(e)),a=u;i?.tagName&&(a=i.tagName);let o=document.createElement(a);o.setAttribute(`data-path`,e),g(e,o,n);let s;for(let n of m(r))if(n?.nestChildren){let r=t(e,`.`),i=n.path.replace(`_root`,r);if(s=d.get(i),s!==void 0)break}(s??l).append(o),d.set(e,o),console.log(`Added el: ${e}`)},g=(e,t,n)=>{console.log(`Rx.dom.update path: ${e} value:`,n);let r=p(W(e));r===void 0?(typeof n==`object`&&(n=JSON.stringify(n)),t.textContent=n):(r.transform&&(n=r.transform(n)),r.update(n,t))},_=e=>{let t=new s({},e),n=t.dequeue(),r=new Set;for(;n!==void 0;){let e=n.path;if(!(`previous`in n)||n.previous===void 0){console.log(`Rx.Dom.elements.changes no previous. path: ${e}`),h(e,n.value);let i=[...o(n.value,!1,2**53-1,e)];console.log(i);for(let e of i)r.has(e.path)||(t.enqueue(e),r.add(e.path))}else if(n.value===void 0){let t=d.get(e);t===void 0?console.warn(`No element to delete? ${e} `):(console.log(`Rx.Dom.elements.changes delete ${e}`),t.remove())}else{let t=d.get(e);t===void 0?(console.warn(`Rx.Dom.elements.changes No element to update ? ${e} `),h(e,n.value)):g(e,t,n.value)}n=t.dequeue()}};e.onDiff(e=>{_(e)}),b(e)&&_([...o(e.last(),!1,1)])},W=e=>{let t=i(e,`.`);return t===e?`_root`:`_root.`+t};function G(){let e=()=>({width:window.innerWidth,height:window.innerHeight}),t=g(window,`resize`,{lazy:`very`,transform:()=>e()}),n=g(window,`pointermove`,{lazy:`very`,transform:e=>{if(e===void 0)return{x:0,y:0};let t=e;return{x:t.x,y:t.y}}});return{dispose:(e=`Reactive.win.dispose`)=>{t.dispose(e),n.dispose(e)},size:t,pointer:n}}var K=e({bind:()=>B,bindDiffUpdate:()=>H,bindElement:()=>I,bindHtml:()=>F,bindText:()=>N,bindUpdate:()=>V,bindValueText:()=>P,browserResizeObservable:()=>w,colour:()=>D,cssClassChange:()=>E,domForm:()=>j,domHslInputValue:()=>k,domInputValue:()=>A,domNumberInputValue:()=>O,elements:()=>U,fromDomQuery:()=>M,win:()=>G,windowResize:()=>T});export{K as RxUi};
+import { n as __exportAll } from "./chunk-CaR5F9JI.js";
+import { C as beforeMatch, D as stringSegmentsWholeToEnd, O as stringSegmentsWholeToFirst, S as afterMatch, nt as findBySomeKey, q as getPathsAndData } from "./src-D552aW4b.js";
+import { v as QueueMutable } from "./src-CkNW04JY.js";
+import { W as resolveEl } from "./src-CbM6s5K6.js";
+import "./src-jCJ1_Kuo.js";
+import { _ as fromCss, g as fromCss$1, h as toCssColour, m as toColour, v as toCssString } from "./src-Du7DcyU5.js";
+import { $ as transform, X as object, _ as event, at as initStream, bt as messageIsSignal, h as observable, lt as hasLast, q as debounce, v as eventTrigger, vt as messageHasValue } from "./src-D_jcRoRU.js";
+
+//#region ../packages/ui/src/rx/browser-resize.ts
+/**
+* Observe when element resizes. Specify `interval` to debounce, uses 100ms by default.
+*
+* ```
+* const o = resizeObservable(myEl, 500);
+* o.subscribe(() => {
+*  // called 500ms after last resize
+* });
+* ```
+* @param elem
+* @param interval Tiemout before event gets triggered
+* @returns
+*/
+const browserResizeObservable = (elem, interval) => {
+	if (elem === null) throw new Error(`Param 'elem' is null. Expected element to observe`);
+	if (elem === void 0) throw new Error(`Param 'elem' is undefined. Expected element to observe`);
+	const m = observable((stream) => {
+		const ro = new ResizeObserver((entries) => {
+			stream.set(entries);
+		});
+		ro.observe(elem);
+		return () => {
+			ro.unobserve(elem);
+		};
+	});
+	return debounce({ elapsed: interval ?? 100 })(m);
+};
+/**
+* Returns an Reactive for window resize. Default 100ms debounce.
+* @param elapsed
+* @returns
+*/
+const windowResize = (elapsed) => debounce({ elapsed: elapsed ?? 100 })(event(window, `resize`, {
+	innerWidth: 0,
+	innerHeight: 0
+}));
+
+//#endregion
+//#region ../packages/ui/src/rx/browser-theme-change.ts
+/**
+* Observe when a class changes on a target element, by default the document.
+* Useful for tracking theme changes.
+*
+* ```js
+* const c = cssClassChange();
+* c.on(msg => {
+*  // some class has changed on the document
+* });
+* ```
+*/
+const cssClassChange = (target = document.documentElement) => {
+	return observable((stream) => {
+		const ro = new MutationObserver((entries) => {
+			stream.set(entries);
+		});
+		ro.observe(target, {
+			attributeFilter: [`class`],
+			attributes: true
+		});
+		return () => {
+			ro.disconnect();
+		};
+	});
+};
+
+//#endregion
+//#region ../packages/ui/src/rx/colour.ts
+function colour(initialValue) {
+	let value = initialValue;
+	const events = initStream();
+	const set = (v) => {
+		value = v;
+		events.set(v);
+	};
+	return {
+		dispose: events.dispose,
+		isDisposed: events.isDisposed,
+		last: () => value,
+		on: events.on,
+		onValue: events.onValue,
+		set,
+		setHsl: (hsl) => {
+			set(hsl);
+		}
+	};
+}
+
+//#endregion
+//#region ../packages/ui/src/rx/dom-source.ts
+/**
+* Reactive getting/setting of values to a HTML INPUT element.
+* 
+* Options:
+* - relative: if _true_, values are 0..1 (default: false)
+* - inverted: if _true_, values are 1..0 (default: false)
+* 
+* If element is missing a 'type' attribute, this will be set to 'range'.
+* @param targetOrQuery 
+* @param options 
+* @returns 
+*/
+function domNumberInputValue(targetOrQuery, options = {}) {
+	const input = domInputValue(targetOrQuery, options);
+	const el = input.el;
+	const relative = options.relative ?? false;
+	const inverted = options.inverted ?? false;
+	const rx = transform(input, (v) => {
+		return Number.parseFloat(v);
+	});
+	if (relative) {
+		el.max = inverted ? "0" : "1";
+		el.min = inverted ? "1" : "0";
+		if (!el.hasAttribute(`step`)) el.step = "0.1";
+	}
+	if (el.getAttribute(`type`) === null) el.type = `range`;
+	const set = (value) => {
+		input.set(value.toString());
+	};
+	return {
+		...rx,
+		last() {
+			return Number.parseFloat(input.last());
+		},
+		set
+	};
+}
+function domHslInputValue(targetOrQuery, options = {}) {
+	const input = domInputValue(targetOrQuery, {
+		...options,
+		upstreamFilter: (value) => {
+			return typeof value === `object` ? toCssColour(value) : value;
+		}
+	});
+	return {
+		...transform(input, (v) => {
+			return fromCss(v, {
+				scalar: true,
+				ensureSafe: true
+			});
+		}),
+		last() {
+			return fromCss(input.last(), {
+				scalar: true,
+				ensureSafe: true
+			});
+		},
+		set(value) {
+			input.set(toCssString(value));
+		}
+	};
+}
+/**
+* A stream of values when the a HTMLInputElement changes. Eg a <input type="range">
+* ```js
+* const r = Rx.From.domInputValue(`#myEl`);
+* r.onValue(value => {
+*  // value will be string
+* });
+* ```
+* 
+* Options:
+* * emitInitialValue: If _true_ emits the HTML value of element (default: false)
+* * attributeName: If set, this is the HTML attribute value is set to when writing to stream (default: 'value')
+* * fieldName: If set, this is the DOM object field set when writing to stream (default: 'value')
+* * when: 'changed'|'changing' when values are emitted. (default: 'changed')
+* * fallbackValue:  Fallback value to use if field/attribute cannot be read (default: '')
+* @param targetOrQuery 
+* @param options 
+* @returns 
+*/
+function domInputValue(targetOrQuery, options = {}) {
+	const target = typeof targetOrQuery === `string` ? document.querySelector(targetOrQuery) : targetOrQuery;
+	if (target === null && typeof targetOrQuery === `string`) throw new Error(`Element query could not be resolved '${targetOrQuery}'`);
+	if (target === null) throw new Error(`targetOrQuery is null`);
+	const el = resolveEl(targetOrQuery);
+	const eventName = (options.when ?? `changed`) === `changed` ? `change` : `input`;
+	const emitInitialValue = options.emitInitialValue ?? false;
+	const fallbackValue = options.fallbackValue ?? ``;
+	const upstreamSource = options.upstreamSource;
+	let upstreamSourceUnsub = () => {};
+	let attribName = options.attributeName;
+	let fieldName = options.fieldName;
+	if (fieldName === void 0 && attribName === void 0) attribName = fieldName = `value`;
+	const readValue = () => {
+		let value;
+		if (attribName) value = el.getAttribute(attribName);
+		if (fieldName) value = el[fieldName];
+		if (value === void 0 || value === null) value = fallbackValue;
+		return value;
+	};
+	const setValue = (value) => {
+		if (attribName) el.setAttribute(attribName, value);
+		if (fieldName) el[fieldName] = value;
+	};
+	const setUpstream = (v) => {
+		v = options.upstreamFilter ? options.upstreamFilter(v) : v;
+		setValue(v);
+	};
+	if (upstreamSource) {
+		upstreamSourceUnsub = upstreamSource.onValue(setUpstream);
+		if (hasLast(upstreamSource)) setUpstream(upstreamSource.last());
+	}
+	const rxEvents = eventTrigger(el, eventName, {
+		fireInitial: emitInitialValue,
+		debugFiring: options.debugFiring ?? false,
+		debugLifecycle: options.debugLifecycle ?? false
+	});
+	const rxValues = transform(rxEvents, (_trigger) => readValue());
+	return {
+		...rxValues,
+		el,
+		last() {
+			return readValue();
+		},
+		set(value) {
+			setValue(value);
+		},
+		dispose(reason) {
+			upstreamSourceUnsub();
+			rxValues.dispose(reason);
+			rxEvents.dispose(reason);
+		}
+	};
+}
+/**
+* Listens for data changes from elements within a HTML form element.
+* Input elements must have a 'name' attribute.
+* 
+* Simple usage:
+* ```js
+* const rx = Rx.From.domForm(`#my-form`);
+* rx.onValue(value => {
+*  // Object containing values from form
+* });
+* 
+* rx.last(); // Read current values of form
+* ```
+* 
+* UI can be updated
+* ```js
+* // Set using an object of key-value pairs
+* rx.set({
+*  size: 'large'
+* });
+* 
+* // Or set a single name-value pair
+* rx.setNamedValue(`size`, `large`);
+* ```
+* 
+* If an 'upstream' reactive is provided, this is used to set initial values of the UI, overriding
+* whatever may be in the HTML. Upstream changes modify UI elements, but UI changes do not modify the upstream
+* source.
+* 
+* ```js
+* // Create a reactive object
+* const obj = Rx.From.object({
+*  when: `2024-10-03`,
+*  size: 12,
+*  checked: true
+* });
+* 
+* // Use this as initial values for a HTML form
+* // (assuming appropriate INPUT/SELECT elements exist)
+* const rx = Rx.From.domForm(`form`, { 
+*  upstreamSource: obj
+* });
+* 
+* // Listen for changes in the UI
+* rx.onValue(value => {
+*  
+* });
+* ```
+* @param formElOrQuery 
+* @param options 
+* @returns 
+*/
+function domForm(formElOrQuery, options = {}) {
+	const formEl = resolveEl(formElOrQuery);
+	const eventName = (options.when ?? `changed`) === `changed` ? `change` : `input`;
+	const emitInitialValue = options.emitInitialValue ?? false;
+	const upstreamSource = options.upstreamSource;
+	const typeHints = /* @__PURE__ */ new Map();
+	let upstreamSourceUnsub = () => {};
+	const readValue = () => {
+		const fd = new FormData(formEl);
+		const entries = [];
+		for (const [k, v] of fd.entries()) {
+			const vString = v.toString();
+			let typeHint = typeHints.get(k);
+			if (!typeHint) {
+				const el = getFormElement(k, vString);
+				if (el) {
+					if (el.type === `range` || el.type === `number`) typeHint = `number`;
+					else if (el.type === `color`) typeHint = `colour`;
+					else if (el.type === `checkbox` && (v === `true` || v === `on`)) typeHint = `boolean`;
+					else typeHint = `string`;
+					typeHints.set(k, typeHint);
+				}
+			}
+			if (typeHint === `number`) entries.push([k, Number.parseFloat(vString)]);
+			else if (typeHint === `boolean`) {
+				const vBool = vString === `true` ? true : false;
+				entries.push([k, vBool]);
+			} else if (typeHint === `colour`) {
+				const vRgb = toCssColour(vString);
+				entries.push([k, fromCss$1(vRgb, { scalar: false })]);
+			} else entries.push([k, v.toString()]);
+		}
+		for (const el of formEl.querySelectorAll(`input[type="checkbox"]`)) if (!el.checked && el.value === `true`) entries.push([el.name, false]);
+		return Object.fromEntries(entries);
+	};
+	const getFormElement = (name, value) => {
+		const el = formEl.querySelector(`[name="${name}"]`);
+		if (!el) {
+			console.warn(`Form does not contain an element with name="${name}"`);
+			return;
+		}
+		if (el.type === `radio`) {
+			const radioEl = formEl.querySelector(`[name="${name}"][value="${value}"]`);
+			if (!radioEl) {
+				console.warn(`Form does not contain radio option for name=${name} value=${value}`);
+				return;
+			}
+			return radioEl;
+		}
+		return el;
+	};
+	const setNamedValue = (name, value) => {
+		const el = getFormElement(name, value);
+		if (!el) return;
+		if (el.nodeName === `INPUT` || el.nodeName === `SELECT`) {
+			if (el.type === `color`) {
+				if (typeof value === `object`) value = toCssColour(value);
+			} else if (el.type === `checkbox`) if (typeof value === `boolean`) {
+				el.checked = value;
+				return;
+			} else console.warn(`Rx.Sources.domForm: Trying to set non boolean type to a checkbox. Name: ${name} Value: ${value} (${typeof value})`);
+			else if (el.type === `radio`) {
+				el.checked = true;
+				return;
+			}
+			el.value = value;
+		}
+	};
+	const setFromUpstream = (value) => {
+		for (const [name, v] of Object.entries(value)) {
+			let hint = typeHints.get(name);
+			if (!hint) {
+				hint = typeof v;
+				if (hint === `object`) {
+					toColour(v);
+					hint = `colour`;
+				}
+				typeHints.set(name, hint);
+			}
+			setNamedValue(name, options.upstreamFilter ? options.upstreamFilter(name, v) : v);
+		}
+	};
+	if (upstreamSource) {
+		upstreamSourceUnsub = upstreamSource.onValue(setFromUpstream);
+		if (hasLast(upstreamSource)) setFromUpstream(upstreamSource.last());
+	}
+	const rxEvents = eventTrigger(formEl, eventName, {
+		fireInitial: emitInitialValue,
+		debugFiring: options.debugFiring ?? false,
+		debugLifecycle: options.debugLifecycle ?? false
+	});
+	const rxValues = transform(rxEvents, (_trigger) => readValue());
+	return {
+		...rxValues,
+		el: formEl,
+		last() {
+			return readValue();
+		},
+		set: setFromUpstream,
+		setNamedValue,
+		dispose(reason) {
+			upstreamSourceUnsub();
+			rxValues.dispose(reason);
+			rxEvents.dispose(reason);
+		}
+	};
+}
+
+//#endregion
+//#region ../packages/ui/src/rx/dom.ts
+/**
+* Reactive stream of array of elements that match `query`.
+* @param query 
+* @returns 
+*/
+function fromDomQuery(query) {
+	const elements = [...document.querySelectorAll(query)];
+	return object(elements);
+}
+/**
+* Updates an element's `textContent` when the source value changes.
+* ```js
+* bindText(source, `#blah`);
+* ```
+* @param elOrQuery 
+* @param source 
+* @param bindOpts 
+*/
+const bindText = (source, elOrQuery, bindOpts = {}) => {
+	return bindElement(source, elOrQuery, {
+		...bindOpts,
+		elField: `textContent`
+	});
+};
+/**
+* Updates an element's `value` (as well as the 'value' attribute) when the source value changes.s
+* @param source 
+* @param elOrQuery 
+* @param bindOpts 
+* @returns 
+*/
+const bindValueText = (source, elOrQuery, bindOpts = {}) => {
+	return bindElement(source, elOrQuery, {
+		...bindOpts,
+		elField: `value`,
+		attribName: `value`
+	});
+};
+/**
+* Updates an element's `innerHTML` when the source value changes
+* ```js
+* bindHtml(source, `#blah`);
+* ```
+* 
+* Uses {@link bindElement}, with `{elField:'innerHTML'}` as the options.
+* @param elOrQuery
+* @param source 
+* @param bindOpts 
+* @returns 
+*/
+const bindHtml = (source, elOrQuery, bindOpts = {}) => {
+	return bindElement(source, elOrQuery, {
+		...bindOpts,
+		elField: `innerHTML`
+	});
+};
+/**
+* Shortcut to bind to an elements attribute
+* @param elOrQuery
+* @param source 
+* @param attribute 
+* @param bindOpts 
+* @returns 
+*/
+/**
+* Shortcut to bind to a CSS variable
+* @param elOrQuery
+* @param source 
+* @param cssVariable 
+* @param bindOpts 
+* @returns 
+*/
+/**
+* Creates a new HTML element, calling {@link bind} on it to update when `source` emits new values.
+* 
+* 
+* ```js
+* // Set textContent of a SPAN with values from `source`
+* create(source, { tagName: `span`, parentEl: document.body })
+* ```
+* 
+* If `parentEl` is not given in the options, the created element needs to be manually added
+* ```js
+* const b = create(source);
+* someEl.append(b.el); // Append manually
+* ```
+* 
+* ```
+* // Set 'title' attribute based on values from `source`
+* create(source, { parentEl: document.body, attribName: `title` })
+* ```
+* @param source 
+* @param options 
+* @returns 
+*/
+/**
+* Update a DOM element's field, attribute or CSS variable when `source` produces a value.
+* 
+* ```js
+* // Access via DOM query. Binds to 'textContent' by default
+* bind(readableSource, `#someEl`);
+* 
+* // Set innerHTML instead
+* bind(readableSource, someEl, { elField: `innerHTML` });
+* 
+* // An attribute
+* bind(readableSource, someEl, { attribName: `width` });
+* 
+* // A css variable ('--' optiona)
+* bind(readableSource, someEl, { cssVariable: `hue` });
+* 
+* // Pluck a particular field from source data.
+* // Ie someEl.textContent = value.colour
+* bind(readableSource, someEl, { sourceField: `colour` });
+* 
+* // Transform value before setting it to field
+* bind(readableSource, someEl, { 
+*  field: `innerHTML`, 
+*  transform: (v) => `Colour: ${v.colour}`
+* })
+* ```
+* 
+* If `source` has an initial value, this is used when first bound.
+* 
+* Returns {@link PipeDomBinding} to control binding:
+* ```js
+* const bind = bind(source, `#someEl`);
+* bind.remove();     // Unbind
+* bind.remove(true); // Unbind and remove HTML element
+* ```
+* 
+* If several fields need to be updated based on a new value, consider using {@link bindUpdate} instead.
+* @param elOrQuery Element to update to, or query string such as '#someid'
+* @param source Source of data
+* @param binds Bindings
+*/
+const bindElement = (source, elOrQuery, ...binds) => {
+	if (elOrQuery === null) throw new Error(`Param 'elOrQuery' is null`);
+	if (elOrQuery === void 0) throw new Error(`Param 'elOrQuery' is undefined`);
+	const el = resolveEl(elOrQuery);
+	let b = [];
+	if (binds.length === 0) b.push({ elField: `textContent` });
+	else b = [...binds];
+	return bind(source, ...b.map((bind) => {
+		if (`element` in bind) return bind;
+		return {
+			...bind,
+			element: el
+		};
+	}));
+};
+const resolveBindUpdater = (bind, element) => {
+	const b = resolveBindUpdaterBase(bind);
+	return (value) => {
+		b(value, element);
+	};
+};
+const resolveBindUpdaterBase = (bind) => {
+	if (bind.elField !== void 0 || bind.cssVariable === void 0 && bind.attribName === void 0 && bind.cssProperty === void 0 && bind.textContent === void 0 && bind.htmlContent === void 0) {
+		const field = bind.elField ?? `textContent`;
+		return (v, element) => {
+			element[field] = v;
+		};
+	}
+	if (bind.attribName !== void 0) {
+		const attrib = bind.attribName;
+		return (v, element) => {
+			element.setAttribute(attrib, v);
+		};
+	}
+	if (bind.textContent) return (v, element) => {
+		element.textContent = v;
+	};
+	if (bind.htmlContent) return (v, element) => {
+		element.innerHTML = v;
+	};
+	if (bind.cssVariable !== void 0) {
+		let css = bind.cssVariable;
+		if (!css.startsWith(`--`)) css = `--` + css;
+		return (v, element) => {
+			element.style.setProperty(css, v);
+		};
+	}
+	if (bind.cssProperty !== void 0) return (v, element) => {
+		element.style[bind.cssProperty] = v;
+	};
+	return (_, _element) => {
+		/** no-op */
+	};
+};
+const resolveTransform = (bind) => {
+	if (!bind.transform && !bind.transformValue) return;
+	if (bind.transformValue) {
+		if (bind.sourceField === void 0) throw new Error(`Expects 'sourceField' to be set when 'transformValue' is set`);
+		return (value) => {
+			const fieldValue = value[bind.sourceField];
+			return bind.transformValue(fieldValue);
+		};
+	} else if (bind.transform) {
+		if (bind.sourceField !== void 0) throw new Error(`If 'transform' is set, 'sourceField' is ignored`);
+		return (value) => bind.transform(value);
+	}
+};
+/**
+* Binds `source` to one or more element(s). One or more bindings for the same source
+* can be provided.
+* 
+* ```js
+* bind(source, 
+*  // Binds .name field of source values to textContent of #some-element
+*  { query: `#some-element`, sourceField: `name` },
+*  { query: `section`, }
+* );
+* ```
+* 
+* Can update
+* * CSS variables
+* * CSS styles
+* * textContent / innerHTML
+* * HTML DOM attributes and object fields
+* 
+* Can use a particular field on source values, or use the whole value. These can
+* pass through `transformValue` or `transform` respectively.
+* 
+* Returns a function to unbind from source and optionally remove HTML element
+* ```js
+* const unbind = bind( . . . );
+* unbind();     // Unbind
+* unbind(true); // Unbind and remove HTML element(s)
+* ```
+* @param source 
+* @param bindsUnresolvedElements 
+* @returns 
+*/
+const bind = (source, ...bindsUnresolvedElements) => {
+	const binds = bindsUnresolvedElements.map((bind) => {
+		if (bind.element && bind.element !== void 0) return bind;
+		if (bind.query) return {
+			...bind,
+			element: resolveEl(bind.query)
+		};
+		throw new Error(`Unable to resolve element. Missing 'element' or 'query' values on bind. ${JSON.stringify(bind)}`);
+	});
+	const bindsResolved = binds.map((bind) => ({
+		update: resolveBindUpdater(bind, bind.element),
+		transformer: resolveTransform(bind),
+		sourceField: bind.sourceField
+	}));
+	const update = (value) => {
+		for (const bind of bindsResolved) if (bind.transformer) bind.update(bind.transformer(value));
+		else {
+			const v = bind.sourceField ? value[bind.sourceField] : value;
+			if (typeof v === `object`) if (bind.sourceField) bind.update(JSON.stringify(v));
+			else bind.update(JSON.stringify(v));
+			else bind.update(v);
+		}
+	};
+	const unsub = source.on((message) => {
+		if (messageHasValue(message)) update(message.value);
+		else if (messageIsSignal(message)) console.warn(message);
+	});
+	if (hasLast(source)) update(source.last());
+	return { remove: (removeElements) => {
+		unsub();
+		if (removeElements) for (const bind of binds) bind.element.remove();
+	} };
+};
+/**
+* Calls `updater` whenever `source` produces a value. Useful when several fields from a value
+* are needed to update an element.
+* ```js
+* bindUpdate(source, `#someEl`, (v, el) => {
+*  el.setAttribute(`width`, v.width);
+*  el.setAttribute(`height`, v.height);
+* });
+* ```
+* 
+* Returns a {@link PipeDomBinding} to manage binding
+* ```js
+* const b = bindUpdate(...);
+* b.remove();     // Disconnect binding
+* b.remove(true); // Disconnect binding and remove element
+* b.el;           // HTML element
+* ```
+* @param elOrQuery 
+* @param source 
+* @param updater 
+* @returns 
+*/
+const bindUpdate = (source, elOrQuery, updater) => {
+	const el = resolveEl(elOrQuery);
+	const update = (value) => {
+		updater(value, el);
+	};
+	const unsub = source.on((message) => {
+		if (messageHasValue(message)) {
+			console.log(message);
+			update(message.value);
+		} else console.warn(message);
+	});
+	if (hasLast(source)) update(source.last());
+	return { remove: (removeElement) => {
+		unsub();
+		if (removeElement) el.remove();
+	} };
+};
+/**
+* Updates a HTML element based on diffs on an object.
+* ```js
+* // Wrap an object
+* const o = Rx.object({ name: `Jane`, ticks: 0 });
+* const b = bindDiffUpdate(`#test`, o, (diffs, el) => {
+*  // el = reference to #test
+* // diff = Array of Changes, 
+* //  eg [ { path: `ticks`, value: 797, previous: 0 } ]
+*  for (const diff of diffs) {
+*    if (diff.path === `ticks`) el.textContent = `${diff.previous} -> ${diff.value}`
+*  }
+* })
+* 
+* // Eg. update field
+* o.updateField(`ticks`, Math.floor(Math.random()*1000));
+* ```
+* 
+* If `initial` is provided as an option, this will be called if `source` has an initial value. Without this, the DOM won't be updated until the first data
+* update happens.
+* ```js
+* bindDiffUpdate(el, source, updater, { 
+*  initial: (v, el) => {
+*    el.innerHTML = v.name;
+*  }
+* })
+* ```
+* @param elOrQuery 
+* @param source 
+* @param updater 
+* @param opts 
+* @returns 
+*/
+const bindDiffUpdate = (source, elOrQuery, updater, opts = {}) => {
+	if (elOrQuery === null) throw new Error(`Param 'elOrQuery' is null`);
+	if (elOrQuery === void 0) throw new Error(`Param 'elOrQuery' is undefined`);
+	const el = resolveEl(elOrQuery);
+	const update = (value) => {
+		updater(value, el);
+	};
+	const unsub = source.onDiff((value) => {
+		update(value);
+	});
+	const init = () => {
+		if (hasLast(source) && opts.initial) opts.initial(source.last(), el);
+	};
+	init();
+	return {
+		refresh: () => {
+			init();
+		},
+		remove: (removeElement) => {
+			unsub();
+			if (removeElement) el.remove();
+		}
+	};
+};
+/**
+* Creates a new HTML element and calls `bindUpdate` so values from `source` can be used
+* to update it.
+* 
+* 
+* ```js
+* // Creates a span, adding it to <body>
+* const b = createUpdate(dataSource, (value, el) => {
+*  el.width = value.width;
+*  el.height = value.height;
+* }, { 
+*  tagName: `SPAN`,
+*  parentEl: document.body
+* })
+* ```
+* @param source 
+* @param updater 
+* @param options 
+* @returns 
+*/
+/**
+* Creates, updates & deletes elements based on pathed values from a reactive.
+* 
+* This means that elements are only manipulated if its associated data changes,
+* and elements are not modified if there's no need to.
+* @param source 
+* @param options 
+*/
+const elements = (source, options) => {
+	const containerEl = options.container ? resolveEl(options.container) : document.body;
+	const defaultTag = options.defaultTag ?? `div`;
+	const elByField = /* @__PURE__ */ new Map();
+	const binds = /* @__PURE__ */ new Map();
+	for (const [key, value] of Object.entries(options.binds ?? {})) {
+		const tagName = value.tagName ?? defaultTag;
+		binds.set(key, {
+			...value,
+			update: resolveBindUpdaterBase(value),
+			transform: resolveTransform(value),
+			tagName,
+			path: key
+		});
+	}
+	const findBind = (path) => {
+		const bind = findBySomeKey(binds, stringSegmentsWholeToEnd(path));
+		if (bind !== void 0) return bind;
+		if (!path.includes(`.`)) return binds.get(`_root`);
+	};
+	function* ancestorBinds(path) {
+		for (const p of stringSegmentsWholeToFirst(path)) if (binds.has(p)) yield binds.get(p);
+		if (binds.has(`_root`) && path.includes(`.`)) yield binds.get(`_root`);
+	}
+	const create = (path, value) => {
+		const rootedPath = getRootedPath(path);
+		console.log(`Rx.Dom.elements.create: ${path} rooted: ${rootedPath} value: ${JSON.stringify(value)}`);
+		const bind = findBind(getRootedPath(path));
+		let tagName = defaultTag;
+		if (bind?.tagName) tagName = bind.tagName;
+		const el = document.createElement(tagName);
+		el.setAttribute(`data-path`, path);
+		update(path, el, value);
+		let parentForEl;
+		for (const b of ancestorBinds(rootedPath)) if (b?.nestChildren) {
+			const absoluteRoot = beforeMatch(path, `.`);
+			const findBy = b.path.replace(`_root`, absoluteRoot);
+			parentForEl = elByField.get(findBy);
+			if (parentForEl === void 0) {} else break;
+		}
+		(parentForEl ?? containerEl).append(el);
+		elByField.set(path, el);
+		console.log(`Added el: ${path}`);
+	};
+	const update = (path, el, value) => {
+		console.log(`Rx.dom.update path: ${path} value:`, value);
+		const bind = findBind(getRootedPath(path));
+		if (bind === void 0) {
+			if (typeof value === `object`) value = JSON.stringify(value);
+			el.textContent = value;
+		} else {
+			if (bind.transform) value = bind.transform(value);
+			bind.update(value, el);
+		}
+	};
+	const changes = (changes) => {
+		const queue = new QueueMutable({}, changes);
+		let d = queue.dequeue();
+		const seenPaths = /* @__PURE__ */ new Set();
+		while (d !== void 0) {
+			const path = d.path;
+			if (!(`previous` in d) || d.previous === void 0) {
+				console.log(`Rx.Dom.elements.changes no previous. path: ${path}`);
+				create(path, d.value);
+				const subdata = [...getPathsAndData(d.value, false, Number.MAX_SAFE_INTEGER, path)];
+				console.log(subdata);
+				for (const dd of subdata) if (!seenPaths.has(dd.path)) {
+					queue.enqueue(dd);
+					seenPaths.add(dd.path);
+				}
+			} else if (d.value === void 0) {
+				const el = elByField.get(path);
+				if (el === void 0) console.warn(`No element to delete? ${path} `);
+				else {
+					console.log(`Rx.Dom.elements.changes delete ${path}`);
+					el.remove();
+				}
+			} else {
+				const el = elByField.get(path);
+				if (el === void 0) {
+					console.warn(`Rx.Dom.elements.changes No element to update ? ${path} `);
+					create(path, d.value);
+				} else update(path, el, d.value);
+			}
+			d = queue.dequeue();
+		}
+	};
+	/**
+	* Source has changed
+	*/
+	source.onDiff((value) => {
+		changes(value);
+	});
+	if (hasLast(source)) {
+		const last = source.last();
+		changes([...getPathsAndData(last, false, 1)]);
+	}
+};
+/**
+* Replaces the root portion of `path` with the magic keyword `_root`
+* @param path 
+* @returns 
+*/
+const getRootedPath = (path) => {
+	const after = afterMatch(path, `.`);
+	return after === path ? `_root` : `_root.` + after;
+};
+function win() {
+	const generateRect = () => ({
+		width: window.innerWidth,
+		height: window.innerHeight
+	});
+	const size = event(window, `resize`, {
+		lazy: `very`,
+		transform: () => generateRect()
+	});
+	const pointer = event(window, `pointermove`, {
+		lazy: `very`,
+		transform: (args) => {
+			if (args === void 0) return {
+				x: 0,
+				y: 0
+			};
+			const pe = args;
+			return {
+				x: pe.x,
+				y: pe.y
+			};
+		}
+	});
+	const dispose = (reason = `Reactive.win.dispose`) => {
+		size.dispose(reason);
+		pointer.dispose(reason);
+	};
+	return {
+		dispose,
+		size,
+		pointer
+	};
+}
+
+//#endregion
+//#region ../packages/ui/src/rx/index.ts
+var rx_exports = /* @__PURE__ */ __exportAll({
+	bind: () => bind,
+	bindDiffUpdate: () => bindDiffUpdate,
+	bindElement: () => bindElement,
+	bindHtml: () => bindHtml,
+	bindText: () => bindText,
+	bindUpdate: () => bindUpdate,
+	bindValueText: () => bindValueText,
+	browserResizeObservable: () => browserResizeObservable,
+	colour: () => colour,
+	cssClassChange: () => cssClassChange,
+	domForm: () => domForm,
+	domHslInputValue: () => domHslInputValue,
+	domInputValue: () => domInputValue,
+	domNumberInputValue: () => domNumberInputValue,
+	elements: () => elements,
+	fromDomQuery: () => fromDomQuery,
+	win: () => win,
+	windowResize: () => windowResize
+});
+
+//#endregion
+export { rx_exports as RxUi };
+//# sourceMappingURL=ui.js.map

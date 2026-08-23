@@ -1,8 +1,8 @@
-import { t as PathDataChange } from "./pathed-7exI3RzP.js";
-import { r as RecursivePartial } from "./ts-utility-01VlmgFR.js";
-import { i as Interval } from "./types-1oz6G7XR.js";
-import { S as HslScalar } from "./index-AowvMaOR.js";
-import { Ft as ReactiveInitial, Lt as ReactiveNonInitial, Nt as ReactiveDiff, Wt as ReactiveWritable, jt as Reactive, vt as EventSourceOptions, wt as ObjectFieldHandler } from "./index-BBXM3hX6.js";
+import { t as PathDataChange } from "./pathed-BzJuw32Z.js";
+import { r as RecursivePartial } from "./ts-utility-q8tixyWv.js";
+import { i as Interval } from "./types-BE4PFAIb.js";
+import { S as HslScalar } from "./index-CBRPyrU6.js";
+import { Ft as ReactiveInitial, Lt as ReactiveNonInitial, Nt as ReactiveDiff, Wt as ReactiveWritable, jt as Reactive, vt as EventSourceOptions, wt as ObjectFieldHandler } from "./index-C3kPnoJt.js";
 
 //#region ../packages/ui/src/rx/browser-resize.d.ts
 /**
@@ -554,3 +554,4 @@ declare namespace index_d_exports {
 }
 //#endregion
 export { index_d_exports as RxUi };
+//# sourceMappingURL=ui.d.ts.map
