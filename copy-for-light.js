@@ -19,7 +19,9 @@ for (const c of categories) {
 }
 
 // Copy loose files
-await cpy([ `index.html`, `favicon.ico`, `demos.css`, `eslint.config.mjs` ], `${destination}/`);
+await cpy([ `index.html`, `favicon.ico`, `demos.css`, `eslint.config.mjs`, `base.css` ], `${destination}/`);
+await cpy([ `./.vscode/settings.json`, `./.vscode/extensions.json` ], `${destination}`);
+
 
 try {
   // Re-write import map

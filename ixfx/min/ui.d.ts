@@ -1,7 +1,7 @@
 import { t as PathDataChange } from "./pathed-BzJuw32Z.js";
 import { r as RecursivePartial } from "./ts-utility-q8tixyWv.js";
 import { i as Interval } from "./types-BE4PFAIb.js";
-import { S as HslScalar } from "./index-CBRPyrU6.js";
+import { S as HslScalar } from "./index-CZFmwxD_.js";
 import { Ft as ReactiveInitial, Lt as ReactiveNonInitial, Nt as ReactiveDiff, Wt as ReactiveWritable, jt as Reactive, vt as EventSourceOptions, wt as ObjectFieldHandler } from "./index-C3kPnoJt.js";
 
 //#region ../packages/ui/src/rx/browser-resize.d.ts

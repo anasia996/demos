@@ -5,9 +5,9 @@ import { v as pairwise } from "./src-B6pmAinX.js";
 import { f as MapOfSimpleMutable, i as StackImmutable, u as QueueImmutable } from "./src-CkNW04JY.js";
 import { n as SimpleEventEmitter } from "./src-CRR1VQls.js";
 import { A as round$1, P as interpolate, V as clamp$2, b as quantiseEvery, g as scaler, p as scaleClamped, rt as clamp$1, y as scalerTwoWay } from "./src-C1pyiFt0.js";
-import { C as ElementSizer, G as resolveElementTry, W as resolveEl } from "./src-CbM6s5K6.js";
-import { At as subtractSize, B as toCartesian, D as isQuadraticBezier, E as isCubicBezier, Ft as EmptyPositioned, H as angleConvert, I as fromNumbers, It as PlaceholderPositioned, Kt as applyFields, Mt as isLine, Nt as isEqual, Pt as Empty, U as angleParse, Ut as corners$1, Wt as center, Xt as guard$5, Yt as isRectPositioned, _ as cells, g as rows, h as offset, i as corners, j as PointsTracker, jt as multiplyScalar, m as indexFromCell, o as scaler$1, qt as guard$6, z as fromLine, zt as subtract } from "./src-jCJ1_Kuo.js";
-import { G as delayLoop } from "./src-bU0lGB4M.js";
+import { C as ElementSizer, G as resolveElementTry, W as resolveEl } from "./src-CvrfRWyP.js";
+import { At as subtractSize, B as toCartesian, D as isQuadraticBezier, E as isCubicBezier, Ft as EmptyPositioned, H as angleConvert, I as fromNumbers, It as PlaceholderPositioned, Kt as applyFields, Mt as isLine, Nt as isEqual, Pt as Empty, U as angleParse, Ut as corners$1, Wt as center, Xt as guard$5, Yt as isRectPositioned, _ as cells, g as rows, h as offset, i as corners, j as PointsTracker, jt as multiplyScalar, m as indexFromCell, o as scaler$1, qt as guard$6, z as fromLine, zt as subtract } from "./src-D8pW0Dyk.js";
+import { G as delayLoop } from "./src-cfydFvc4.js";
 
 //#region ../node_modules/.pnpm/colorizr@4.0.1/node_modules/colorizr/dist/index.mjs
 var __defProp = Object.defineProperty;
@@ -1476,7 +1476,7 @@ function isRgb(v) {
 * If RGB values are less than 1 assumes unit:scalar. Otherwise unit:8bit.
 * If RGB values exceed 255, _undefined_ returned.
 * @param v
-* @returns
+* @returns Rgb object or _undefined_ if the input object is not a valid Rgb type.
 */
 function tryParseObjectToRgb(v) {
 	if (typeof v !== `object`) throw new TypeError(`Param 'v' is expected to be an object, got: ${typeof v}`);
@@ -1487,6 +1487,25 @@ function tryParseObjectToRgb(v) {
 	if (!(`space` in v)) v.space = `srgb`;
 	return v;
 }
+function tryParseObjectToOkLch(v) {
+	if (typeof v !== `object`) throw new TypeError(`Param 'v' is expected to be an object, got: ${typeof v}`);
+	if (!(`l` in v && `c` in v && `h` in v)) return;
+	if (!(`unit` in v)) v.unit = `scalar`;
+	if (!(`space` in v)) v.space = `oklch`;
+	return v;
+}
+/**
+* If the input object has h, s and l properties, it will return a fully-
+* formed Hsl type with `unit` and `space` properties.
+*
+* If it lacks these basic three properties or they are out of range,
+*  _undefined_ is returned.
+*
+* If HSL values are less than 1 assumes unit:scalar. Otherwise unit:8bit.
+* If HSL values exceed 100, _undefined_ returned.
+* @param v
+* @returns Hsl object or _undefined_ if the input object is not a valid Hsl type.
+*/
 function tryParseObjectToHsl(v) {
 	if (!(`h` in v && `s` in v && `l` in v)) return;
 	if (!(`unit` in v)) if (v.s <= 1 && v.l <= 1) v.unit = `scalar`;
@@ -2701,6 +2720,8 @@ function toCssColour(colour) {
 	if (asRgb) return toCssString$1(asRgb);
 	const asHsl = tryParseObjectToHsl(colour);
 	if (asHsl) return toCssString$2(asHsl);
+	const asOkLch = tryParseObjectToOkLch(colour);
+	if (asOkLch) return toCssString(asOkLch);
 	throw new Error(`Unknown colour format: '${JSON.stringify(colour)}'`);
 }
 function toHexColour(colour) {
@@ -3342,6 +3363,7 @@ var colour_exports = /* @__PURE__ */ __exportAll({
 	toLibraryColour: () => toLibraryColour,
 	toStringFirst: () => toStringFirst,
 	tryParseObjectToHsl: () => tryParseObjectToHsl,
+	tryParseObjectToOkLch: () => tryParseObjectToOkLch,
 	tryParseObjectToRgb: () => tryParseObjectToRgb,
 	withOpacity: () => withOpacity
 });
@@ -7093,4 +7115,4 @@ try {
 
 //#endregion
 export { fromCss$3 as _, convolve_2d_exports as a, CanvasRegion as c, image_data_grid_exports as d, drawing_exports as f, fromCss$2 as g, toCssColour as h, video_exports as i, CanvasSource as l, toColour as m, plot_exports as n, pointerVisualise as o, colour_exports as p, manualCapture as r, svg_exports as s, src_exports as t, CanvasHelper as u, toCssString$2 as v };
-//# sourceMappingURL=src-Du7DcyU5.js.map
+//# sourceMappingURL=src-rbv0r-Un.js.map

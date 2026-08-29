@@ -1902,9 +1902,22 @@ declare function isRgb(v: any): v is Rgb;
  * If RGB values are less than 1 assumes unit:scalar. Otherwise unit:8bit.
  * If RGB values exceed 255, _undefined_ returned.
  * @param v
- * @returns
+ * @returns Rgb object or _undefined_ if the input object is not a valid Rgb type.
  */
 declare function tryParseObjectToRgb(v: any): Rgb | undefined;
+declare function tryParseObjectToOkLch(v: any): OkLch | undefined;
+/**
+ * If the input object has h, s and l properties, it will return a fully-
+ * formed Hsl type with `unit` and `space` properties.
+ *
+ * If it lacks these basic three properties or they are out of range,
+ *  _undefined_ is returned.
+ *
+ * If HSL values are less than 1 assumes unit:scalar. Otherwise unit:8bit.
+ * If HSL values exceed 100, _undefined_ returned.
+ * @param v
+ * @returns Hsl object or _undefined_ if the input object is not a valid Hsl type.
+ */
 declare function tryParseObjectToHsl(v: any): Hsl | undefined;
 declare function isOkLch(v: any): v is OkLch;
 declare function isColourish(v: any): v is Colourish;
@@ -2400,7 +2413,7 @@ declare function guard(rgb: YCbCr): void;
  */
 declare function toHexString(ycbcr: YCbCr): string;
 declare namespace index_d_exports$2 {
-  export { Colour, ColourInterpolationOpts, ColourInterpolator, ColourSpaces, ColourStepOpts, Colourish, ConvertDestinations, CreateStepsOptions, CssColourNames, Hsl, HslAbsolute, HslBase, HslScalar, hsl_d_exports as HslSpace, LchBase, OkLch, OkLchAbsolute, OkLchBase, OkLchScalar, oklch_d_exports as OklchSpace, ParsingOptions, Rgb, Rgb8Bit, RgbBase, RgbScalar, srgb_d_exports as SrgbSpace, YCbCr, YCbCr8bit, YCbCrBase, YCbCrScalar, ycbcr_d_exports as YCbCrSpace, convert, convertScalar, convertToString, createSteps, cssDefinedHexColours, cssLinearGradient, decodeRgbFrom16Bit565, decodeRgbFrom24Bit, encodeRgbTo16Bit565, encodeRgbTo24Bit, fromCssColour, goldenAngleColour, guard$4 as guard, interpolator$2 as interpolator, interpolatorDual, interpolatorDualToString, isColourish, isHsl, isOkLch, isRgb, multiplyOpacity, randomHue, resolveCss, rgbToHsl, scale, setOpacity, toColour, toCssColour, toHexColour, toLibraryColour, toStringFirst, tryParseObjectToHsl, tryParseObjectToRgb, withOpacity$2 as withOpacity };
+  export { Colour, ColourInterpolationOpts, ColourInterpolator, ColourSpaces, ColourStepOpts, Colourish, ConvertDestinations, CreateStepsOptions, CssColourNames, Hsl, HslAbsolute, HslBase, HslScalar, hsl_d_exports as HslSpace, LchBase, OkLch, OkLchAbsolute, OkLchBase, OkLchScalar, oklch_d_exports as OklchSpace, ParsingOptions, Rgb, Rgb8Bit, RgbBase, RgbScalar, srgb_d_exports as SrgbSpace, YCbCr, YCbCr8bit, YCbCrBase, YCbCrScalar, ycbcr_d_exports as YCbCrSpace, convert, convertScalar, convertToString, createSteps, cssDefinedHexColours, cssLinearGradient, decodeRgbFrom16Bit565, decodeRgbFrom24Bit, encodeRgbTo16Bit565, encodeRgbTo24Bit, fromCssColour, goldenAngleColour, guard$4 as guard, interpolator$2 as interpolator, interpolatorDual, interpolatorDualToString, isColourish, isHsl, isOkLch, isRgb, multiplyOpacity, randomHue, resolveCss, rgbToHsl, scale, setOpacity, toColour, toCssColour, toHexColour, toLibraryColour, toStringFirst, tryParseObjectToHsl, tryParseObjectToOkLch, tryParseObjectToRgb, withOpacity$2 as withOpacity };
 }
 declare namespace image_data_grid_d_exports {
   export { accessor, byColumn, byRow, grid, setter, wrap };
@@ -2911,4 +2924,3 @@ declare namespace index_d_exports {
 }
 //#endregion
 export { drawing_d_exports as C, HslScalar as S, CanvasRegionSpecRelativeSized as _, image_data_grid_d_exports as a, CanvasHelper as b, DrawingHelper as c, pointerVisualise as d, CanvasRegion as f, CanvasRegionSpecRelativePositioned as g, CanvasRegionSpecMatched as h, index_d_exports$1 as i, index_d_exports$3 as l, CanvasRegionSpecAbsolutePositioned as m, ManualCapturer as n, index_d_exports$2 as o, CanvasRegionSpec as p, video_d_exports as r, convolve_2d_d_exports as s, index_d_exports as t, Opts as u, CanvasSource as v, CanvasHelperOptions as x, CanvasEvents as y };
-//# sourceMappingURL=index-CBRPyrU6.d.ts.map

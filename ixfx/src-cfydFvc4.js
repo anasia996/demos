@@ -3137,7 +3137,7 @@ function to(sm, toState) {
 	return Object.freeze({
 		value: toState,
 		machine: sm.machine,
-		visited: [...new Set(...sm.visited, sm.value)]
+		visited: [...new Set([...sm.visited, sm.value])]
 	});
 }
 function next(sm) {
@@ -3584,4 +3584,4 @@ var src_exports = /* @__PURE__ */ __exportAll({
 
 //#endregion
 export { rateMinimum as A, runSingle as B, runOnce as C, RequestResponseMatch as D, retryTask as E, Resource as F, delayLoop as G, DispatchList as H, create as I, iterateBreadth as K, movingAverageTimed as L, promiseWithResolvers as M, Pool as N, repeat as O, PoolUser as P, eventRace as R, SyncWait as S, retryFunction as T, debounce as U, everyNth as V, delay as W, timerAlwaysDone as _, to as a, throttle as b, singleItem as c, elapsedTicksAbsolute as d, frequencyTimer as f, relative as g, ofTotalTicks as h, init as i, timeout as j, repeatSync as k, updateOutdated as l, ofTotal as m, state_machine_exports as n, waitFor as o, hasElapsed as p, iterateDepth as q, StateMachineWithEvents as r, WaitForValue as s, src_exports as t, elapsedMillisecondsAbsolute as u, timerNeverDone as v, backoffGenerator as w, TaskQueueMutable as x, timerWithFunction as y, run as z };
-//# sourceMappingURL=src-bU0lGB4M.js.map
+//# sourceMappingURL=src-cfydFvc4.js.map

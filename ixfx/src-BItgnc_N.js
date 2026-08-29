@@ -3,8 +3,8 @@ import { Dt as isEqualValueDefault, M as byWord, N as levenshteinOps, h as inter
 import { N as resultThrow, n as stringTest, s as functionTest, w as numberTest, y as integerTest } from "./src-DZFdrMH_.js";
 import { n as SimpleEventEmitter } from "./src-CRR1VQls.js";
 import { F as interpolateAngle, P as interpolate$1, f as scale, rt as clamp } from "./src-C1pyiFt0.js";
-import { Bt as sum, C as interpolator, Ct as Empty, Dt as angleRadian, Et as compare, H as angleConvert, Lt as getEdgeX, Ot as abs, Rt as getEdgeY, S as cubic, St as interpolate$2, T as toPath, Tt as divide, U as angleParse, V as toCartesian, Vt as distance, _t as normalise, bt as multiplyScalar, dt as toRadian, et as isAngleTypeConvertible, gt as pipelineApply, ht as pipeline, tt as radianArc, vt as clampMagnitude, w as quadraticSimple, wt as Unit, xt as invert, yt as multiply, zt as subtract } from "./src-jCJ1_Kuo.js";
-import { O as repeat, d as elapsedTicksAbsolute, f as frequencyTimer, g as relative, h as ofTotalTicks, m as ofTotal, r as StateMachineWithEvents, u as elapsedMillisecondsAbsolute, y as timerWithFunction } from "./src-bU0lGB4M.js";
+import { Bt as sum, C as interpolator, Ct as Empty, Dt as angleRadian, Et as compare, H as angleConvert, Lt as getEdgeX, Ot as abs, Rt as getEdgeY, S as cubic, St as interpolate$2, T as toPath, Tt as divide, U as angleParse, V as toCartesian, Vt as distance, _t as normalise, bt as multiplyScalar, dt as toRadian, et as isAngleTypeConvertible, gt as pipelineApply, ht as pipeline, tt as radianArc, vt as clampMagnitude, w as quadraticSimple, wt as Unit, xt as invert, yt as multiply, zt as subtract } from "./src-D8pW0Dyk.js";
+import { O as repeat, d as elapsedTicksAbsolute, f as frequencyTimer, g as relative, h as ofTotalTicks, m as ofTotal, r as StateMachineWithEvents, u as elapsedMillisecondsAbsolute, y as timerWithFunction } from "./src-cfydFvc4.js";
 import { E as floatSource, T as float } from "./src-C_3O0Q5h.js";
 
 //#region ../packages/modulation/src/cubic-bezier.ts
@@ -3312,4 +3312,4 @@ var src_exports = /* @__PURE__ */ __exportAll({
 
 //#endregion
 export { interpolatorHuman as A, ticks$2 as B, mixModulators as C, interpolateString as D, interpolatorObject as E, interpolatorAngleRadian as F, cubicBezierShape as G, timeModulator as H, forces_exports as I, envelope_exports as L, interpolatorStepped as M, interpolatorBoolean as N, interpolatorByTokens as O, interpolatorAngle as P, easing_exports as R, mix as S, jitterAbsolute as T, gaussian as U, time$1 as V, drift as W, pingPong as _, arcShape as a, noop as b, squareShape as c, waveFromSource as d, timingSourceFactory as f, source_exports as g, springValue as h, weightedAverage as i, interpolatorInterval as j, interpolatorCentered as k, triangleShape as l, springShape as m, weighted as n, sineBipolarShape as o, spring as p, weightedSource as r, sineShape as s, src_exports as t, wave as u, pingPongPercent as v, jitter as w, crossfade as x, oscillator_exports as y, tickModulator as z };
-//# sourceMappingURL=src-DqK7-767.js.map
+//# sourceMappingURL=src-BItgnc_N.js.map

@@ -5,7 +5,7 @@ import { n as SimpleEventEmitter, r as ISimpleEventEmitter } from "./index-CWTNd
 import { bn as Point, fn as Rect } from "./index-qtIs-QFt.js";
 import { l as NumberTracker } from "./index-DMvBzC6_.js";
 import { i as Transitions, n as StateChangeEvent, r as StateMachineWithEvents } from "./state-machine-Cso9ri9w.js";
-import { n as ManualCapturer } from "./index-CBRPyrU6.js";
+import { n as ManualCapturer } from "./index-CZFmwxD_.js";
 
 //#region ../packages/io/src/audio/visualiser.d.ts
 declare class AudioVisualiser {

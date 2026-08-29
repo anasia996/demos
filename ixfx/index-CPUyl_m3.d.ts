@@ -5,7 +5,7 @@ import { n as SimpleEventEmitter, r as ISimpleEventEmitter } from "./index-CWTNd
 import { bn as Point, fn as Rect } from "./index-qtIs-QFt.js";
 import { l as NumberTracker } from "./index-DMvBzC6_.js";
 import { i as Transitions, n as StateChangeEvent, r as StateMachineWithEvents } from "./state-machine-Cso9ri9w.js";
-import { n as ManualCapturer } from "./index-CBRPyrU6.js";
+import { n as ManualCapturer } from "./index-CZFmwxD_.js";
 
 //#region ../packages/io/src/audio/visualiser.d.ts
 declare class AudioVisualiser {
@@ -1844,4 +1844,4 @@ declare namespace index_d_exports {
 }
 //#endregion
 export { Opts$1 as C, camera_d_exports as D, Codec as E, index_d_exports$2 as O, genericStateTransitionsInstance as S, StringReceiveBuffer as T, BleDeviceOptions as _, ReconnectingWebsocketStates as a, IoDataEvent as b, FrameProcessor as c, serial_d_exports as d, JsonDataEvent as f, nordic_ble_device_d_exports as g, JsonDeviceOpts as h, ReconnectingWebsocket as i, FrameProcessorOpts as l, JsonDeviceEvents as m, video_file_d_exports as n, reconnectingWebsocket as o, JsonDevice as p, ReconnectingOptions as r, index_d_exports$1 as s, index_d_exports as t, espruino_d_exports as u, FrameProcessorSources as v, StringWriteBuffer as w, IoEvents as x, GenericStateTransitions as y };
-//# sourceMappingURL=index-KVMCMRLd.d.ts.map
+//# sourceMappingURL=index-CPUyl_m3.d.ts.map
