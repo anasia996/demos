@@ -38,7 +38,7 @@ replaceInFileSync({
 });
 
 // Copy loose files
-await cpy([ `index.html`, `favicon.ico`, `demos.css` ], `${destination}/`);
+await cpy([ `index.html`, `favicon.ico`, `demos.css`, `base.css` ], `${destination}/`);
 
 await cpy([ `eslint.config.mjs` ], `${destinationRoot}/`);
 
