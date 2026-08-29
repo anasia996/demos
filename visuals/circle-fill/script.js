@@ -1,6 +1,6 @@
 import { CanvasHelper } from '@ixfx/visual.js';
 import { repeatSync } from '@ixfx/flow.js';
-import { Points, Circles, Polar } from '@ixfx/geometry.js';
+import { Circles, Polar } from '@ixfx/geometry.js';
 import * as Drawing from './drawing.js';
 
 const piPi = Math.PI * 2;
