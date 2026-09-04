@@ -16,6 +16,8 @@ const settings = Object.freeze({
 *  lastPress: number
 *  lastRelease: number
 *  startPress:number
+*  startSize: number
+*  size: number
  * }} State
  */
 
@@ -25,16 +27,25 @@ let state = Object.freeze({
   repeating: false,
   lastPress: 0,
   lastRelease: 0,
-  startPress: 0
+  startPress: 0,
+  startSize: 20,
+  size: 20,
 });
+
+const baseSize = 20; 
+const growthRate = 0.01;
+const accel = 0.0002;
 
 /**
  * Where we use the state of the keys
  * @returns 
  */
+
+
+
 const use = () => {
   const { info } = settings;
-  const { pressed, startPress } = state;
+  const { pressed, startPress, startSize } = state;
 
   const element = document.querySelector(`#vis`);
   if (!element) return;
@@ -42,7 +53,15 @@ const use = () => {
   if (pressed) {
     // Eg: if being held down, for how long
     const holdTime = Math.round(performance.now() - startPress);
-    info(`Hold time: ${holdTime}`);
+    info(`Hold time: ${holdTime} `);
+    
+    const size = Math.min(startSize + growthRate * holdTime + holdTime * holdTime * accel);
+    
+    element.style.width = `${size}px`;
+    element.style.height = `${size}px`;
+
+    saveState({size});
+    
   }
 
   if (pressed) {
@@ -59,9 +78,9 @@ const use = () => {
  */
 const onKeyDown = (event) => {
   const { key } = settings;
-  let { pressed, startPress } = state;
+  let { pressed, startPress, size } = state;
 
-  console.log(`KeyDown`);
+  console.log(`KeyDown`);  
 
   // Is it the key we are tracking?
   if (key !== event.key) {
@@ -72,7 +91,9 @@ const onKeyDown = (event) => {
   event.preventDefault();
 
   // Wasn't pressed before, now it is - keep track of time
-  if (!pressed) startPress = performance.now();
+  if (!pressed) {
+    startPress = performance.now();
+  }
 
   // Update state
   saveState({
@@ -83,7 +104,10 @@ const onKeyDown = (event) => {
     repeating: event.repeat,
     // Track the time of this event
     lastPress: performance.now(),
-    startPress
+    startPress,
+    ...(state.pressed ? {} : {
+      startSize: size,
+    })
   });
 };
 

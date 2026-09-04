@@ -1,46 +1,36 @@
 import * as Random from '@ixfx/random.js';
 
-const settings = {
-  el: /** @type HTMLElement */(document.querySelector(`#random`)),
-  updateInterval: 500
-};
+const squareEl = document.getElementById("square");
 
 /**
  * Define the type for 'State'
  * @typedef {Readonly<{
- * randomValue: number
  * }>} State
  */
 
 /** @type State */
 let state = Object.freeze({
-  randomValue: 0
 });
 
-// Use state
-function use() {
-  const { el } = settings;
-  let { randomValue } = state;
-  el.innerText = randomValue.toFixed(2);
-}
+let hue = 270;
+let direction = 1; // 1 = increasing, -1 = decreasing
 
-// Compute state
-function update() {
-  // Compute
-  const randomValue = Random.float();
+function changeColor() {
+  hue += 20 * direction;
 
-  // At the end, save state
-  saveState({
-    randomValue
-  });
+  if (hue >= 360) {
+    hue = 360;
+    direction = -1;
+  } else if (hue <= 180) {
+    hue = 180;
+    direction = 1;
+  }
+
+  squareEl.style.backgroundColor = `hsl(${hue}, 90%, 96%)`;
 }
 
 function setup() {
-  // Call update() and use() every half a second
-  setInterval(() => {
-    update();
-    use();
-  }, settings.updateInterval);
+  document.addEventListener("keyup", changeColor);
 }
 
 /**
@@ -48,6 +38,7 @@ function setup() {
  * @param {Partial<State>} s 
  * @returns 
  */
+
 function saveState(s) {
   state = Object.freeze({
     ...state,
