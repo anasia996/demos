@@ -22,8 +22,8 @@ body {
   color-scheme: light dark;
   --hue: 300;
   --font: system-ui;
-  --light: hsl(60, 100%, 100%);
-  --dark: hsl(75, 100%, 99%);
+  --light: hsl(var(--hue), 10%, 80%);
+  --dark: hsl(var(--hue), 80%, 5%);
   --accent: light-dark(hsl(var(--hue), 100%, 40%),hsl(var(--hue), 100%, 80%) )
 }
 
@@ -40,18 +40,17 @@ a:link,a:visited {
 a:hover {
   color: var(--accent);
 }
-
-#square {
-  background-color: hsl(270, 90%, 90%);
-  width: 250px;
-  height: 250px;
-  margin-inline: 40%;  
+#circle{
+  border: thick double rgb(45, 163, 106);
+  background-color: rgb(168, 233, 189);
+  width: 5em;
+  height: 5em;
+  border-radius: 50%;
 }
-
   </style>
-  <h1></h1>
-<div id="info"></div>
-<div id="square"></div>
+<div id="random"></div>
+<div id="circle"></div>
+
   <script type="module" src="script.js"></script>
 </body>
 

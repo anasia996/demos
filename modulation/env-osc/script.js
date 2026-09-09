@@ -4,7 +4,7 @@ import * as Things from './thing.js';
 
 const settings = Object.freeze({
   sizeEm: 10,
-  howManyThings: 10,
+  howManyThings: 100,
   envelope: new Envelopes.Adsr({
     sustainLevel: 1,
     attackDuration: 2000,

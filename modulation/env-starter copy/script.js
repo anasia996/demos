@@ -5,9 +5,9 @@ const settings = Object.freeze({
   // Create the envelope
   envelope: new Envelopes.Adsr({
     attackBend: 1,
-    attackDuration: 1 * 2000,
+    attackDuration: 10 * 1000,
     releaseLevel: 0,
-    releaseDuration: 1 * 1000,
+    releaseDuration: 15 * 1000,
     sustainLevel: 1
   })
 });
@@ -43,26 +43,14 @@ const update = () => {
  */
 const use = (state) => {
   const { envelopeValue } = state;
-  //console.log(envelopeValue);
-  const hsl = `hsl(300deg, 80%, ${envelopeValue*100}%)`;
-  document.body.style.backgroundColor = hsl;
-  document.body.style.scale = `${envelopeValue}`
+  console.log(envelopeValue);
 };
 
 function setup() {
   update();
 
   // Trigger envelope
-  document.addEventListener('keydown', (event) => {
-    if (event.repeat) return;
-    settings.envelope.trigger(true);
-    
-  });
-
-  document.addEventListener('keyup', () => {
-    settings.envelope.release();
-  });
-
+  settings.envelope.trigger();
 }
 setup();
 

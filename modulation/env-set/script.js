@@ -7,9 +7,10 @@ const settings = Object.freeze({
   // Options for envelope
   envelope: /** @type Envelopes.AdsrTimingOpts */({
     attackBend: 1,
-    attackDuration: 1500,
+    attackDuration: 1000,
     releaseLevel: 0,
-    sustainLevel: 1
+    sustainLevel: 1,
+    releaseDuration: 1000
   }),
   sliderEl: /** @type HTMLElement */(document.querySelector(`#slider`)),
   fillEl: /** @type HTMLElement */(document.querySelector(`#slider>.fill`))
