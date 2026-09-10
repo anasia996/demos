@@ -1,16 +1,16 @@
 // @ts-nocheck
 import * as Random from '@ixfx/random.js';
 const square = document.getElementById("square");
-square.style.transition = "background-color 1.0s ease-out"; // release phase animates smoothly
+square.style.transition = "background-color 1.5s ease-out"; // delayed degree shift time
 
-let hue = 135;
+let hue = 0;
 let direction = 1;
 
 // --- Envelope definition ---
 const envelope = {
-  attackMs: 1000,        // delay before any shift is audible/visible
-  degreesPerSecond: 15, // rate of rise once past attack
-  reserveDegrees: 10,   // how far behind "held" value trails the true value
+  attackMs: 1000,        // delay 
+  degreesPerSecond: 20, // degree shift when triggered
+  reserveDegrees: 20,   // delayed degree shift 
 };
 
 // Returns the degree shift for a given elapsed time, before release.
@@ -31,17 +31,17 @@ function envelopeReleaseValue(elapsedMs) {
 let keydownTime = null;
 let animationFrameId = null;
 let baseHue = null;
-let baseDirection = null;
 
-function clampHue(h, dir) {
-  if (h >= 360) return { hue: 360, direction: -1 };
-  if (h <= 135) return { hue: 135, direction: 1 };
-  return { hue: h, direction: dir };
+// Just clamps the value now — no automatic direction flip here anymore.
+function clampHue(h) {
+  if (h >= 360) return 360;
+  if (h <= 0) return 0;
+  return h;
 }
 
 function applyShift(degrees) {
-  const rawHue = baseHue + degrees * baseDirection;
-  return clampHue(rawHue, baseDirection);
+  const rawHue = baseHue + degrees * direction;
+  return clampHue(rawHue);
 }
 
 function liveUpdate() {
@@ -49,21 +49,23 @@ function liveUpdate() {
 
   const elapsedMs = Date.now() - keydownTime;
   const shiftDegrees = envelopeHeldValue(elapsedMs);
-  const clamped = applyShift(shiftDegrees);
+  const clampedHue = applyShift(shiftDegrees);
 
-  square.style.backgroundColor = `hsl(${clamped.hue}, 88%, 70%)`;
+  square.style.backgroundColor = `hsl(${clampedHue}, 88%, 70%)`;
   animationFrameId = requestAnimationFrame(liveUpdate);
 }
 
-function handleKeyDown() {
+function handleKeyDown(event) {
+  if(event.keyCode !== 84) return;
   if (keydownTime !== null) return; // ignore key-repeat
   keydownTime = Date.now();
+  console.log (event.keyCode);
   baseHue = hue;
-  baseDirection = direction;
   animationFrameId = requestAnimationFrame(liveUpdate);
 }
 
 function handleKeyUp() {
+  if(event.keyCode !== 84) return;
   if (keydownTime === null) return;
 
   const elapsedMs = Date.now() - keydownTime;
@@ -73,18 +75,22 @@ function handleKeyUp() {
     animationFrameId = null;
   }
 
-  const shiftDegrees = envelopeReleaseValue(elapsedMs);
-  const clamped = applyShift(shiftDegrees);
+  if (elapsedMs < envelope.attackMs) {
+    // Quick tap, released before the shift even started — treat as a manual
+    // direction switch instead of a color shift.
+    direction *= -1;
+  } else {
+    const shiftDegrees = envelopeReleaseValue(elapsedMs);
+    hue = applyShift(shiftDegrees);
+  }
 
-  hue = clamped.hue;
-  direction = clamped.direction;
   square.style.backgroundColor = `hsl(${hue}, 88%, 70%)`;
-
   keydownTime = null;
 }
 
 function setup() {
   document.addEventListener("keydown", handleKeyDown);
+  
   document.addEventListener("keyup", handleKeyUp);
 }
 
