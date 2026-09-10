@@ -56,16 +56,15 @@ function liveUpdate() {
 }
 
 function handleKeyDown(event) {
-  if(event.keyCode !== 84) return;
+  if(event.keyCode !== 32) return;
   if (keydownTime !== null) return; // ignore key-repeat
   keydownTime = Date.now();
-  console.log (event.keyCode);
   baseHue = hue;
   animationFrameId = requestAnimationFrame(liveUpdate);
 }
 
 function handleKeyUp() {
-  if(event.keyCode !== 84) return;
+  if(event.keyCode !== 32) return;
   if (keydownTime === null) return;
 
   const elapsedMs = Date.now() - keydownTime;
