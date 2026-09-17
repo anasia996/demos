@@ -25,16 +25,17 @@ body {
  color-scheme: light dark;
  --hue: 300;
  --font: system-ui;
- /* --//light: hsl(0, 16%,88%);
- --//dark: hsl(75, 100%, 99%);
- --accent: light-dark(hsl(var(--hue), 100%, 40%),hsl(var(--hue), 100%, 80%) ) */
+
 }
 
 
 body {
- background-color: hsl(230, 94%, 93%);
+ background-color: hsl(0, 0%, 50%);
  color: light-dark(var(--dark), var(--light));
  font-family: var(--font);
+ display: flex;
+ justify-content: center;
+ align-items: center;
 }
 
 
@@ -49,11 +50,11 @@ a:hover {
 
 
 #square {
- background-color:hsla(199, 100%, 61%, 0.406);
+ background-color:hsl(199, 100%, 61%);
  width: 100px;
- height: 800px;
- border-radius: 0%;
- margin-inline: 40%; 
+ height: 100px;
+ border-radius: 100%;
+ margin-top: 20%;
 }
 
 
