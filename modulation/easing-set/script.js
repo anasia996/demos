@@ -4,8 +4,8 @@ import * as Util from './util.js';
 
 const settings = Object.freeze({
   easing: /** @type Mod.Easings.EasingOptions */({
-    name: `quintIn`,
-    duration: 1000,
+    name: `smoothstep`,
+    duration: 500,
   }),
   // The visual 'fill' element
   fillElement: /** @type HTMLElement */(document.querySelector(`#slider>.fill`)),

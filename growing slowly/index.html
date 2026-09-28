@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+
+
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>bare bones</title>
+</head>
+
+
+<body>
+ <script type="importmap">{ "imports": { "@ixfx":"/ixfx/core.js", "@ixfx/": "/ixfx/" } }</script>
+ <style>
+*,
+*:before,
+*:after,
+html,
+body {
+ box-sizing: border-box;
+}
+
+
+:root {
+ color-scheme: light dark;
+ --hue: 300;
+ --font: system-ui;
+
+}
+
+
+body {
+ background-color: hsl(0, 0%, 50%);
+ font-family: var(--font);
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+
+
+
+a:link,a:visited {
+ color: light-dark(var(--dark), var(--light));
+ text-decoration-style: wavy;
+}
+a:hover {
+ color: var(--accent);
+}
+
+
+#square {
+ background-color:hsl(199, 100%, 61%);
+ width: 50px;
+ height: 50px;
+ border-radius: 100%;
+ margin-top: 30%;
+}
+
+
+ </style>
+ <h1></h1>
+<div id="info"></div>
+<div id="square"></div>
+ <script type="module" src="script.js"></script>
+</body>
+
+
+</html>
