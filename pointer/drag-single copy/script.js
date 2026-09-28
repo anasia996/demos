@@ -3,34 +3,36 @@ import * as Things from './thing.js';
 import * as Util from './util.js';
 
 const settings = Object.freeze({
-  updateRateMs: 1,
-  howManyThings: 5
+  updateRateMs: 1
 });
 
 /** 
  * @typedef {{
- *  things:Things.Thing[]
+ *  thing:Things.Thing
  * }} State
  */
 
 /** @type {State} */
 let state = Object.freeze({
-  things: []
+  // Create our thing
+  thing: Things.create()
 });
 
 
 const use = () => {
-  state.things.forEach(t => Things.use(t));
+  Things.use(state.thing);
 };
 
 const update = () => {
-  // Update things
-  let things = state.things.map((t) => Things.update(t, state));
+  let { thing } = state;
+
+  // Update thing, this creates a new copy
+  thing = Things.update(thing, state);
 
   // TODO: other state changes? eg to the 'world' state?
-  
+
   // Save the new copy
-  saveState({ things });
+  saveState({ thing });
 
   // Loop!
   setTimeout(update, 10);
@@ -42,20 +44,19 @@ const update = () => {
  * @param {PointerEvent} event 
  */
 function onPointerDown(event) {
-  let { things } = state;
+  const { thing } = state;
   const target = event.target;
+
+  // Pointerdown happened on something other than a Thing, not interested
+  if (thing.el !== target) return;
 
   // Relative point at which drag was started
   // ie. go from pixel x, y to scalar 0..1, 0..1
   const startedAt = Util.relativePoint(event.x, event.y);
 
-  things = things.map((t) => {
-    if (t.el !== target) return t; // this one wasn't clicked
-
-    // Keep track of its dragged state and where it started
-    return Things.onDragStart(t, startedAt);
-  });
-  saveState({ things });
+  // Keep track of its dragged state and where it started
+  const changedThing = Things.onDragStart(thing, startedAt);
+  saveState({ thing: changedThing });
 }
 
 /**
@@ -63,10 +64,8 @@ function onPointerDown(event) {
  * @param {PointerEvent} event 
  */
 function onPointerUp(event) {
-  let things = state.things.map(t => Things.onDragDone(t));
-
   // Update our state
-  saveState({ things });
+  saveState({ thing: Things.onDragDone(state.thing) });
 }
 
 /**
@@ -75,16 +74,16 @@ function onPointerUp(event) {
  * @param {PointerEvent} event 
  */
 function onPointerMove(event) {
-  // Get pointer position in relative terms
-  const cursorDragNow = Util.relativePoint(event.x, event.y);
+  const { thing } = state;
 
-  // Map over array
-  let things = state.things.map(t => {
-    // Haven't started dragging, don't care
-    if (Points.isPlaceholder(t.cursorDragStart)) return t;
-    return Things.saveThingState(t, { cursorDragNow });
-  });
-  saveState({ things });
+  // Haven't started dragging, don't care
+  if (Points.isPlaceholder(thing.cursorDragStart)) return;
+
+  // Get pointer position in relative terms
+  const pointerPosition = Util.relativePoint(event.x, event.y);
+
+  const movedThing = Things.saveThingState(thing, { cursorDragNow: pointerPosition });
+  saveState({ thing: movedThing });
 }
 
 function setup() {
@@ -92,11 +91,6 @@ function setup() {
   document.addEventListener(`pointermove`, onPointerMove);
   document.addEventListener(`pointerup`, onPointerUp);
 
-  let count = settings.howManyThings;
-  while (count > 0) {
-    state.things.push(Things.create());
-    count--;
-  }
   setInterval(() => {
     update();
     use();

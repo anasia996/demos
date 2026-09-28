@@ -90,7 +90,7 @@
     "cursor-global": false,
     "cursor-workspace": false
   },
-  "chat.disableAIFeatures": true,
+  "chat.disableAIFeatures": false,
   "chat.agent.enabled": false,
   "chat.extensionTools.enabled": false,
   "chat.autopilot.advanced.enabled": false
